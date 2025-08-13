@@ -4,13 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artisans on the Alley - Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f7f3e8;
-            --text: #4a3b2a;
-            --accent: #b47a3c;
-            --muted: #d8c7a6;
-            --radius: 10px;
+            --bg: #FAF7F1;
+            --bgAlt: #F3EEE5;
+            --ink: #3C2F26;
+            --inkSoft: #6A5A4C;
+            --accent: #A0662E;
+            --accentDeep: #7F4F22;
+            --olive: #6F7B58;
+            --berry: #7C4C5B;
+            --line: #E6DDCF;
+            --success: #4E7D55;
+            --danger: #9C3B3B;
+            --radius: 12px;
         }
         
         * {
@@ -21,19 +31,29 @@
         
         body {
             background: var(--bg);
-            color: var(--text);
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, serif;
+            color: var(--ink);
+            font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
             line-height: 1.6;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="%23000" opacity="0.1"/><circle cx="25" cy="25" r="0.3" fill="%23000" opacity="0.05"/><circle cx="75" cy="75" r="0.4" fill="%23000" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.06;
+            mix-blend-mode: multiply;
         }
         
         /* Navigation Styles */
         .navbar {
-            background: var(--muted);
+            background: var(--bgAlt);
             padding: 0 20px;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid var(--line);
         }
         
         .nav-container {
@@ -49,10 +69,12 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--text);
+            font-weight: 700;
+            color: var(--ink);
             text-decoration: none;
+            letter-spacing: 0.2px;
         }
         
         .nav-brand:hover {
@@ -71,7 +93,7 @@
         }
         
         .nav-link {
-            color: var(--text);
+            color: var(--ink);
             text-decoration: none;
             font-weight: 600;
             padding: 10px 15px;
@@ -91,20 +113,20 @@
             color: white;
             padding: 10px 15px;
             border-radius: var(--radius);
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         
         .nav-cart:hover {
-            background: #a06a2a;
+            background: var(--accentDeep);
         }
         
         .cart-badge {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: #e74c3c;
+            background: var(--danger);
             color: white;
             border-radius: 50%;
             width: 20px;
@@ -113,7 +135,7 @@
             align-items: center;
             justify-content: center;
             font-size: 0.8rem;
-            font-weight: bold;
+            font-weight: 800;
         }
         
         /* Page Content */
@@ -143,14 +165,18 @@
         }
         
         .header h1 {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 10px;
-            color: var(--text);
+            color: var(--ink);
+            letter-spacing: 0.2px;
         }
         
         .header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--accent);
+            font-weight: 600;
         }
         
         .section {
@@ -158,11 +184,14 @@
         }
         
         .section h2 {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
+            font-weight: 700;
             margin-bottom: 20px;
-            color: var(--text);
+            color: var(--ink);
             border-bottom: 2px solid var(--accent);
             padding-bottom: 10px;
+            letter-spacing: 0.2px;
         }
         
         .products-grid {
@@ -176,7 +205,8 @@
             background: white;
             border-radius: var(--radius);
             padding: 20px;
-            box-shadow: 0 2px 6px rgba(0,0,0,.05);
+            box-shadow: 0 6px 16px rgba(0,0,0,.06);
+            border: 1px solid var(--line);
             transition: transform 0.2s;
         }
         
@@ -193,20 +223,22 @@
         }
         
         .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
             font-size: 1.3rem;
-            font-weight: bold;
             margin-bottom: 8px;
-            color: var(--text);
+            color: var(--ink);
         }
         
         .product-description {
-            color: #666;
+            color: var(--inkSoft);
             margin-bottom: 15px;
+            font-size: 0.95rem;
         }
         
         .product-price {
             font-size: 1.2rem;
-            font-weight: bold;
+            font-weight: 700;
             color: var(--accent);
             margin-bottom: 15px;
         }
@@ -217,13 +249,14 @@
             padding: 12px 24px;
             border: none;
             border-radius: var(--radius);
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
             transition: background 0.2s;
+            font-size: 14px;
         }
         
         .btn:hover {
-            background: #a06a2a;
+            background: var(--accentDeep);
         }
         
         .cart-section {
@@ -231,6 +264,8 @@
             border-radius: var(--radius);
             padding: 20px;
             margin-bottom: 40px;
+            border: 1px solid var(--line);
+            box-shadow: 0 6px 16px rgba(0,0,0,.06);
         }
         
         .cart-item {
@@ -238,21 +273,27 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--line);
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
         }
         
         .cart-total {
             font-size: 1.3rem;
-            font-weight: bold;
+            font-weight: 800;
             text-align: right;
             margin-top: 20px;
-            color: var(--text);
+            color: var(--ink);
         }
         
         .admin-section {
             background: white;
             border-radius: var(--radius);
             padding: 20px;
+            border: 1px solid var(--line);
+            box-shadow: 0 6px 16px rgba(0,0,0,.06);
         }
         
         .form-group {
@@ -262,27 +303,37 @@
         .form-group label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
+            font-weight: 600;
+            color: var(--ink);
         }
         
         .form-group input, .form-group textarea {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--line);
             border-radius: var(--radius);
             font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
         }
         
         .status {
-            background: var(--muted);
+            background: var(--bgAlt);
             padding: 15px;
             border-radius: var(--radius);
             margin-bottom: 20px;
+            border: 1px solid var(--line);
         }
         
         .status h3 {
-            color: var(--text);
+            color: var(--ink);
             margin-bottom: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
         }
         
         .status-item {
@@ -292,40 +343,68 @@
         }
         
         .status-ok {
-            color: #28a745;
-            font-weight: bold;
+            color: var(--success);
+            font-weight: 700;
         }
         
         .status-pending {
-            color: #ffc107;
-            font-weight: bold;
+            color: var(--accent);
+            font-weight: 700;
         }
         
         /* Orders Table */
         .orders-table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0 8px;
             background: white;
             border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,.05);
+            border: 1px solid var(--line);
+            box-shadow: 0 6px 16px rgba(0,0,0,.06);
         }
         
         .orders-table th,
         .orders-table td {
             padding: 15px;
             text-align: left;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--line);
         }
         
         .orders-table th {
             background: var(--accent);
             color: white;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 14px;
         }
         
         .orders-table tr:hover {
-            background: #f9f9f9;
+            background: var(--bgAlt);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-delivered {
+            background: var(--success);
+            color: white;
+        }
+        
+        .status-transit {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .status-processing {
+            background: var(--inkSoft);
+            color: white;
         }
         
         /* Mobile Responsive */
@@ -361,7 +440,7 @@
                     <a href="#" class="nav-link" onclick="showPage('products')">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="showPage('cart')">Cart</a>
+                    <a href="#" class="nav-link" onclick="showPage('cart')">Bag</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="showPage('orders')">Orders</a>
@@ -371,7 +450,7 @@
                 </li>
                 <li class="nav-item">
                     <div class="nav-cart" onclick="showPage('cart')">
-                        🛒 Cart
+                        🛒 Bag
                         <span class="cart-badge">3</span>
                     </div>
                 </li>
@@ -383,8 +462,8 @@
     <div id="home" class="page active">
         <div class="container">
             <div class="header">
-                <h1>🍞 Artisans on the Alley</h1>
-                <p>Freshly baked & handcrafted goods</p>
+                <h1>Artisans on the Alley</h1>
+                <p>Freshly baked • Handcrafted goods</p>
             </div>
 
             <div class="status">
@@ -406,28 +485,28 @@
             <div class="section">
                 <h2>🎨 Brand Colors</h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                    <div style="background: #f7f3e8; padding: 20px; border-radius: var(--radius); text-align: center;">
+                    <div style="background: #FAF7F1; padding: 20px; border-radius: var(--radius); text-align: center; border: 1px solid var(--line);">
                         <strong>Background</strong><br>
-                        #f7f3e8
+                        #FAF7F1
                     </div>
-                    <div style="background: #4a3b2a; color: white; padding: 20px; border-radius: var(--radius); text-align: center;">
-                        <strong>Text</strong><br>
-                        #4a3b2a
+                    <div style="background: #3C2F26; color: white; padding: 20px; border-radius: var(--radius); text-align: center;">
+                        <strong>Ink</strong><br>
+                        #3C2F26
                     </div>
-                    <div style="background: #b47a3c; color: white; padding: 20px; border-radius: var(--radius); text-align: center;">
+                    <div style="background: #A0662E; color: white; padding: 20px; border-radius: var(--radius); text-align: center;">
                         <strong>Accent</strong><br>
-                        #b47a3c
+                        #A0662E
                     </div>
-                    <div style="background: #d8c7a6; padding: 20px; border-radius: var(--radius); text-align: center;">
-                        <strong>Muted</strong><br>
-                        #d8c7a6
+                    <div style="background: #E6DDCF; padding: 20px; border-radius: var(--radius); text-align: center; border: 1px solid var(--line);">
+                        <strong>Line</strong><br>
+                        #E6DDCF
                     </div>
                 </div>
             </div>
 
             <div class="section">
                 <h2>🔗 Access Points</h2>
-                <div style="background: white; padding: 20px; border-radius: var(--radius);">
+                <div style="background: white; padding: 20px; border-radius: var(--radius); border: 1px solid var(--line); box-shadow: 0 6px 16px rgba(0,0,0,.06);">
                     <p><strong>Backend API:</strong> <a href="http://localhost:4000/health" target="_blank">http://localhost:4000/health</a></p>
                     <p><strong>Admin Panel:</strong> <a href="http://localhost:5173" target="_blank">http://localhost:5173</a></p>
                     <p><strong>Products API:</strong> <a href="http://localhost:4000/products" target="_blank">http://localhost:4000/products</a></p>
@@ -441,8 +520,8 @@
     <div id="products" class="page">
         <div class="container">
             <div class="header">
-                <h1>📱 Our Products</h1>
-                <p>Freshly baked & handcrafted goods</p>
+                <h1>Our Products</h1>
+                <p>Freshly baked • Handcrafted goods</p>
             </div>
 
             <div class="products-grid">
@@ -451,7 +530,7 @@
                     <div class="product-name">Country Sourdough</div>
                     <div class="product-description">Traditional sourdough bread with a crispy crust</div>
                     <div class="product-price">$6.00</div>
-                    <button class="btn" onclick="addToCart('Country Sourdough', 600)">Add to Cart</button>
+                    <button class="btn" onclick="addToCart('Country Sourdough', 600)">Add</button>
                 </div>
                 
                 <div class="product-card">
@@ -459,7 +538,7 @@
                     <div class="product-name">Chocolate Croissant</div>
                     <div class="product-description">Buttery croissant filled with dark chocolate</div>
                     <div class="product-price">$4.50</div>
-                    <button class="btn" onclick="addToCart('Chocolate Croissant', 450)">Add to Cart</button>
+                    <button class="btn" onclick="addToCart('Chocolate Croissant', 450)">Add</button>
                 </div>
                 
                 <div class="product-card">
@@ -467,7 +546,7 @@
                     <div class="product-name">Artisan Cookies</div>
                     <div class="product-description">Handcrafted cookies with premium ingredients</div>
                     <div class="product-price">$3.50</div>
-                    <button class="btn" onclick="addToCart('Artisan Cookies', 350)">Add to Cart</button>
+                    <button class="btn" onclick="addToCart('Artisan Cookies', 350)">Add</button>
                 </div>
                 
                 <div class="product-card">
@@ -475,7 +554,7 @@
                     <div class="product-name">Rustic Baguette</div>
                     <div class="product-description">Classic French baguette with golden crust</div>
                     <div class="product-price">$5.00</div>
-                    <button class="btn" onclick="addToCart('Rustic Baguette', 500)">Add to Cart</button>
+                    <button class="btn" onclick="addToCart('Rustic Baguette', 500)">Add</button>
                 </div>
                 
                 <div class="product-card">
@@ -483,7 +562,7 @@
                     <div class="product-name">Cinnamon Roll</div>
                     <div class="product-description">Sweet cinnamon roll with cream cheese frosting</div>
                     <div class="product-price">$4.00</div>
-                    <button class="btn" onclick="addToCart('Cinnamon Roll', 400)">Add to Cart</button>
+                    <button class="btn" onclick="addToCart('Cinnamon Roll', 400)">Add</button>
                 </div>
                 
                 <div class="product-card">
@@ -491,7 +570,7 @@
                     <div class="product-name">Artisan Bread</div>
                     <div class="product-description">Handcrafted artisan bread with rustic crust</div>
                     <div class="product-price">$7.00</div>
-                    <button class="btn" onclick="addToCart('Artisan Bread', 700)">Add to Cart</button>
+                    <button class="btn" onclick="addToCart('Artisan Bread', 700)">Add</button>
                 </div>
             </div>
         </div>
@@ -501,27 +580,28 @@
     <div id="cart" class="page">
         <div class="container">
             <div class="header">
-                <h1>🛒 Shopping Cart</h1>
+                <h1>Your Bag</h1>
                 <p>Review your order</p>
             </div>
 
             <div class="cart-section">
                 <div class="cart-item">
-                    <span>Country Sourdough x2</span>
+                    <span>Country Sourdough ×2</span>
                     <span>$12.00</span>
                 </div>
                 <div class="cart-item">
-                    <span>Chocolate Croissant x1</span>
+                    <span>Chocolate Croissant ×1</span>
                     <span>$4.50</span>
                 </div>
                 <div class="cart-item">
-                    <span>Artisan Cookies x3</span>
+                    <span>Artisan Cookies ×3</span>
                     <span>$10.50</span>
                 </div>
                 <div class="cart-total">
                     Total: $27.00
                 </div>
-                <button class="btn" style="width: 100%; margin-top: 20px;" onclick="showPage('checkout')">Proceed to Checkout</button>
+                <button class="btn" style="width: 100%; margin-top: 20px;" onclick="showPage('checkout')">Continue to checkout</button>
+                <p style="text-align: center; margin-top: 12px; color: var(--inkSoft); font-size: 14px;">Pickup today after 3pm</p>
             </div>
         </div>
     </div>
@@ -530,7 +610,7 @@
     <div id="orders" class="page">
         <div class="container">
             <div class="header">
-                <h1>📋 Recent Orders</h1>
+                <h1>Recent Orders</h1>
                 <p>Track your orders</p>
             </div>
 
@@ -547,28 +627,37 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>#ART-001</td>
+                        <td style="font-weight: 600; color: var(--accent);">#ART-001</td>
                         <td>2024-01-15</td>
-                        <td>John Doe</td>
-                        <td>Country Sourdough x2, Chocolate Croissant x1</td>
-                        <td>$16.50</td>
-                        <td>✅ Delivered</td>
+                        <td>
+                            <div style="font-weight: 600;">John Doe</div>
+                            <div style="font-size: 12px; color: var(--inkSoft);">john@example.com</div>
+                        </td>
+                        <td>Country Sourdough ×2, Chocolate Croissant ×1</td>
+                        <td style="font-weight: 600; color: var(--accent);">$16.50</td>
+                        <td><span class="status-badge status-delivered">Delivered</span></td>
                     </tr>
                     <tr>
-                        <td>#ART-002</td>
+                        <td style="font-weight: 600; color: var(--accent);">#ART-002</td>
                         <td>2024-01-14</td>
-                        <td>Jane Smith</td>
-                        <td>Artisan Cookies x3, Rustic Baguette x1</td>
-                        <td>$15.50</td>
-                        <td>🚚 In Transit</td>
+                        <td>
+                            <div style="font-weight: 600;">Jane Smith</div>
+                            <div style="font-size: 12px; color: var(--inkSoft);">jane@example.com</div>
+                        </td>
+                        <td>Artisan Cookies ×3, Rustic Baguette ×1</td>
+                        <td style="font-weight: 600; color: var(--accent);">$15.50</td>
+                        <td><span class="status-badge status-transit">In Transit</span></td>
                     </tr>
                     <tr>
-                        <td>#ART-003</td>
+                        <td style="font-weight: 600; color: var(--accent);">#ART-003</td>
                         <td>2024-01-13</td>
-                        <td>Mike Johnson</td>
-                        <td>Cinnamon Roll x2, Artisan Bread x1</td>
-                        <td>$15.00</td>
-                        <td>⏳ Processing</td>
+                        <td>
+                            <div style="font-weight: 600;">Mike Johnson</div>
+                            <div style="font-size: 12px; color: var(--inkSoft);">mike@example.com</div>
+                        </td>
+                        <td>Cinnamon Roll ×2, Artisan Bread ×1</td>
+                        <td style="font-weight: 600; color: var(--accent);">$15.00</td>
+                        <td><span class="status-badge status-processing">Processing</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -579,12 +668,12 @@
     <div id="admin" class="page">
         <div class="container">
             <div class="header">
-                <h1>⚙️ Admin Panel</h1>
+                <h1>Admin Panel</h1>
                 <p>Manage products and orders</p>
             </div>
 
             <div class="admin-section">
-                <h3>Add New Product</h3>
+                <h2>Add New Product</h2>
                 <form>
                     <div class="form-group">
                         <label>Product Name</label>
@@ -592,7 +681,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea rows="3" placeholder="Product description..."></textarea>
+                        <textarea rows="4" placeholder="Describe the product..."></textarea>
                     </div>
                     <div class="form-group">
                         <label>Price (cents)</label>
@@ -626,7 +715,7 @@
         
         // Cart functionality
         function addToCart(productName, price) {
-            alert(`Added ${productName} to cart!`);
+            alert(`Added ${productName} to bag!`);
             // Update cart badge
             const badge = document.querySelector('.cart-badge');
             const currentCount = parseInt(badge.textContent);
