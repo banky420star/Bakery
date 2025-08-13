@@ -1,0 +1,14 @@
+:root{
+  --bg:#FAF7F1; --bgAlt:#F3EEE5; --ink:#2E261E; --inkSoft:#6A5A4C;
+  --accent:#A0662E; --line:#E6DDCF; --radius:12px;
+}
+html,body{ background:var(--bg); color:var(--ink); margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+nav{ display:flex; gap:18px; padding:14px 18px; background:var(--bgAlt); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:10; }
+a{ color:var(--ink); text-decoration:none; font-weight:800 }
+h1,h2{ font-family: Georgia, 'Times New Roman', serif; letter-spacing:.2px }
+.card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:18px; box-shadow:0 8px 18px rgba(0,0,0,.06); }
+.input, textarea{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:10px 12px; width:100%; }
+.button{ background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; font-weight:800; border:none; cursor:pointer }
+.table{ width:100%; border-collapse:separate; border-spacing:0 8px }
+.table tr{ background:#fff; }
+.table td, .table th{ padding:12px 14px; border-top:1px solid var(--line); border-bottom:1px solid var(--line) }
