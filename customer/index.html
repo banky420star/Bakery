@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artisans on the Alley - Freshly Baked Goods</title>
+    <title>Artisans Up The Alley - Freshly Baked Goods</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -66,6 +66,13 @@
             font-size: 1.1rem;
             color: var(--accent);
             font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .hours {
+            font-size: 0.9rem;
+            color: var(--inkSoft);
+            font-style: italic;
         }
         
         .container {
@@ -74,11 +81,25 @@
             padding: 20px;
         }
         
+        .category-section {
+            margin: 40px 0;
+        }
+        
+        .category-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--ink);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+        
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
-            margin: 40px 0;
+            margin-bottom: 40px;
         }
         
         .product-card {
@@ -249,6 +270,25 @@
             text-align: center;
         }
         
+        .order-note {
+            background: var(--bgAlt);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            border: 1px solid var(--line);
+        }
+        
+        .order-note h3 {
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 10px;
+            color: var(--ink);
+        }
+        
+        .order-note p {
+            color: var(--inkSoft);
+            font-size: 0.95rem;
+        }
+        
         @media (max-width: 768px) {
             .products-grid {
                 grid-template-columns: 1fr;
@@ -262,13 +302,40 @@
 </head>
 <body>
     <div class="header">
-        <h1>Artisans on the Alley</h1>
+        <h1>Artisans Up The Alley</h1>
         <p>Freshly baked • Handcrafted goods</p>
+        <div class="hours">WED-SUN, 08:00-13:30 ☀️</div>
     </div>
 
     <div class="container">
-        <div class="products-grid" id="products">
-            <!-- Products will be loaded here -->
+        <div class="order-note">
+            <h3>📝 Order Information</h3>
+            <p>Please order a day or two in advance 🙏🏼</p>
+            <p>Pop in on the days we are open to see what experimental creations await you 👀🥐🥖🍞</p>
+        </div>
+
+        <!-- Bread Section -->
+        <div class="category-section">
+            <h2 class="category-title">Bread</h2>
+            <div class="products-grid" id="bread-products">
+                <!-- Bread products will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Treats Section -->
+        <div class="category-section">
+            <h2 class="category-title">Treats</h2>
+            <div class="products-grid" id="treats-products">
+                <!-- Treats products will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Other Section -->
+        <div class="category-section">
+            <h2 class="category-title">Other</h2>
+            <div class="products-grid" id="other-products">
+                <!-- Other products will be loaded here -->
+            </div>
         </div>
 
         <div class="cart-section" id="cart-section" style="display: none;">
@@ -277,75 +344,221 @@
                 <!-- Cart items will be displayed here -->
             </div>
             <div class="cart-total" id="cart-total">
-                Total: $0.00
+                Total: R0.00
             </div>
             <button class="checkout-btn" onclick="checkout()">Continue to checkout</button>
-            <p class="pickup-note">Pickup today after 3pm</p>
+            <p class="pickup-note">Please order a day or two in advance 🙏🏼</p>
         </div>
     </div>
 
     <script>
         let cart = [];
-        let products = [
+        let allProducts = [
+            // Bread
             {
                 id: 1,
-                name: "Country Sourdough",
-                description: "Traditional sourdough bread with a crispy crust",
-                price: 6.00,
-                image: "https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=400"
+                name: "Burger Buns",
+                description: "Made to order, minimum x5",
+                price: 15,
+                category: "bread",
+                image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400"
             },
             {
                 id: 2,
-                name: "Chocolate Croissant",
-                description: "Buttery croissant filled with dark chocolate",
-                price: 4.50,
-                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400"
+                name: "Montreal Bagels",
+                description: "Made to order, minimum x5",
+                price: 15,
+                category: "bread",
+                image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400"
             },
             {
                 id: 3,
-                name: "Artisan Cookies",
-                description: "Handcrafted cookies with premium ingredients",
-                price: 3.50,
-                image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400"
-            },
-            {
-                id: 4,
-                name: "Rustic Baguette",
-                description: "Classic French baguette with golden crust",
-                price: 5.00,
+                name: "Baguette",
+                description: "Classic French baguette",
+                price: 30,
+                category: "bread",
                 image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400"
             },
             {
+                id: 4,
+                name: "West Coast Loaf",
+                description: "Sweet Potato Sourdough",
+                price: 50,
+                category: "bread",
+                image: "https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=400"
+            },
+            {
                 id: 5,
-                name: "Cinnamon Roll",
-                description: "Sweet cinnamon roll with cream cheese frosting",
-                price: 4.00,
-                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400"
+                name: "Seeded Sourdough",
+                description: "Wholewheat",
+                price: 40,
+                category: "bread",
+                image: "https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=400"
             },
             {
                 id: 6,
-                name: "Artisan Bread",
-                description: "Handcrafted artisan bread with rustic crust",
-                price: 7.00,
-                image: "https://images.unsplash.com/photo-1608198093002-ad4e505484ba?w=400"
+                name: "Organic Sourdough",
+                description: "Redemption loaf - round/tin",
+                price: 50,
+                category: "bread",
+                image: "https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=400"
+            },
+            {
+                id: 7,
+                name: "Experimental Loaf",
+                description: "Cheese & Chilli",
+                price: 60,
+                category: "bread",
+                image: "https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=400"
+            },
+            {
+                id: 8,
+                name: "Rye",
+                description: "100% seeded",
+                price: 75,
+                category: "bread",
+                image: "https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=400"
+            },
+            {
+                id: 9,
+                name: "Buckwheat",
+                description: "Gluten Free",
+                price: 85,
+                category: "bread",
+                image: "https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=400"
+            },
+            
+            // Treats
+            {
+                id: 10,
+                name: "Organic Shortbread",
+                description: "Traditional shortbread cookies",
+                price: 10,
+                category: "treats",
+                image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400"
+            },
+            {
+                id: 11,
+                name: "Cheese Stick",
+                description: "With onion",
+                price: 25,
+                category: "treats",
+                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400"
+            },
+            {
+                id: 12,
+                name: "Belgium Chocolate Brownie",
+                description: "Rich chocolate brownie",
+                price: 30,
+                category: "treats",
+                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400"
+            },
+            {
+                id: 13,
+                name: "Pecan Tart",
+                description: "Sweet pecan tart",
+                price: 30,
+                category: "treats",
+                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400"
+            },
+            {
+                id: 14,
+                name: "Plain Croissant",
+                description: "Buttery plain croissant",
+                price: 30,
+                category: "treats",
+                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400"
+            },
+            {
+                id: 15,
+                name: "Cheese & Marmite Croissant",
+                description: "Savory croissant with cheese and marmite",
+                price: 45,
+                category: "treats",
+                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400"
+            },
+            {
+                id: 16,
+                name: "Chocolate Croissant",
+                description: "Buttery croissant filled with dark chocolate",
+                price: 45,
+                category: "treats",
+                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400"
+            },
+            {
+                id: 17,
+                name: "Pesto & Feta Croissant",
+                description: "Savory croissant with pesto and feta",
+                price: 50,
+                category: "treats",
+                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400"
+            },
+            
+            // Other
+            {
+                id: 18,
+                name: "Rusks",
+                description: "Muesli rusks",
+                price: 80,
+                category: "other",
+                image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400"
+            },
+            {
+                id: 19,
+                name: "Mazavaroo",
+                description: "Chilli mazavaroo",
+                price: 90,
+                category: "other",
+                image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400"
+            },
+            {
+                id: 20,
+                name: "Raw Honey",
+                description: "520g raw honey",
+                price: 120,
+                category: "other",
+                image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400"
             }
         ];
 
         function renderProducts() {
-            const productsContainer = document.getElementById('products');
-            productsContainer.innerHTML = products.map(product => `
+            const breadProducts = allProducts.filter(p => p.category === 'bread');
+            const treatsProducts = allProducts.filter(p => p.category === 'treats');
+            const otherProducts = allProducts.filter(p => p.category === 'other');
+            
+            document.getElementById('bread-products').innerHTML = breadProducts.map(product => `
                 <div class="product-card">
                     <img src="${product.image}" alt="${product.name}" class="product-image">
                     <div class="product-name">${product.name}</div>
                     <div class="product-description">${product.description}</div>
-                    <div class="product-price">$${product.price.toFixed(2)}</div>
+                    <div class="product-price">R${product.price}</div>
+                    <button class="btn" onclick="addToCart(${product.id})">Add</button>
+                </div>
+            `).join('');
+            
+            document.getElementById('treats-products').innerHTML = treatsProducts.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-description">${product.description}</div>
+                    <div class="product-price">R${product.price}</div>
+                    <button class="btn" onclick="addToCart(${product.id})">Add</button>
+                </div>
+            `).join('');
+            
+            document.getElementById('other-products').innerHTML = otherProducts.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-description">${product.description}</div>
+                    <div class="product-price">R${product.price}</div>
                     <button class="btn" onclick="addToCart(${product.id})">Add</button>
                 </div>
             `).join('');
         }
 
         function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
+            const product = allProducts.find(p => p.id === productId);
             const existingItem = cart.find(item => item.id === productId);
             
             if (existingItem) {
@@ -388,7 +601,7 @@
                 <div class="cart-item">
                     <div>
                         <div style="font-weight: 600;">${item.name}</div>
-                        <div style="color: var(--inkSoft); font-size: 14px;">$${item.price.toFixed(2)} each</div>
+                        <div style="color: var(--inkSoft); font-size: 14px;">R${item.price} each</div>
                     </div>
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <div class="quantity-controls">
@@ -397,14 +610,14 @@
                             <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
                         </div>
                         <div style="font-weight: 700; color: var(--accent);">
-                            $${(item.price * item.quantity).toFixed(2)}
+                            R${(item.price * item.quantity)}
                         </div>
                     </div>
                 </div>
             `).join('');
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+            cartTotal.textContent = `Total: R${total}`;
         }
 
         function checkout() {
@@ -414,7 +627,9 @@
             }
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            alert(`Order submitted! Total: $${total.toFixed(2)}\n\nPickup today after 3pm.\n\nThank you for choosing Artisans on the Alley!`);
+            const orderDetails = cart.map(item => `${item.name} ×${item.quantity}`).join('\n');
+            
+            alert(`Order submitted! Total: R${total}\n\nOrder Details:\n${orderDetails}\n\nPlease order a day or two in advance 🙏🏼\n\nThank you for choosing Artisans Up The Alley!`);
             
             // Clear cart
             cart = [];
